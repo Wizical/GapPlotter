@@ -25,7 +25,7 @@ Clone the GapPlotter repository to your local machine using the following comman
 2. Install Dependencies
 Navigate to the cloned repository directory and install the required dependencies using pip
 
-3. Usage
+## Usage
 Generating CSV File of Gaps
 To generate a CSV file containing information about gaps in a BAM file, use the following command:
 
