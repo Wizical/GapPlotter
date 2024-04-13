@@ -21,13 +21,19 @@ def generate_gap_csv(input_file, output_file):
         # Check if the read starts after the current position
         if read.reference_start > current_position:
             # If there is a gap, record it
-            gap_info.append((read.reference_name, current_position, read.reference_start - 1))
+            gap_start = current_position
+            gap_end = read.reference_start - 1
+            gap_length = gap_end - gap_start + 1
+            gap_info.append((read.reference_name, gap_start, gap_end, gap_length))  # Include gap length
         # Update the current position
         current_position = read.reference_end + 1
 
     # If there is a gap at the end of the reference genome, record it
     if current_position < reference_length:
-        gap_info.append((bam_file.references[-1], current_position, reference_length - 1))
+        gap_start = current_position
+        gap_end = reference_length - 1
+        gap_length = gap_end - gap_start + 1
+        gap_info.append((bam_file.references[-1], gap_start, gap_end, gap_length))  # Include gap length
 
     # Close the BAM file
     bam_file.close()
@@ -35,7 +41,7 @@ def generate_gap_csv(input_file, output_file):
     # Write gap information to CSV file
     with open(output_file, mode='w', newline='') as csv_file:
         writer = csv.writer(csv_file)
-        writer.writerow(['Reference', 'Gap Start', 'Gap End'])
+        writer.writerow(['Reference', 'Gap Start', 'Gap End', 'Gap Length'])  # Include header for gap length
         writer.writerows(gap_info)
 
     print("Gap information exported to:", output_file)
