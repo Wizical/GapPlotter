@@ -14,4 +14,4 @@ GapPlotter is useful for researchers working with DNA sequence data who need to 
 - Compatible with Python 3.x
 
 ## Installation
-To install GapPlotter, simply clone the repository.
+To install GapPlotter, simply clone the repository and install dependencies.
